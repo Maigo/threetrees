@@ -1,0 +1,12 @@
+{
+  "name": "threetrees",
+  "version": "0.0.0",
+  "authors": [
+    "Teodor Jakobsson <teodor.jakobsson@netlight.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "threejs": "*"
+  }
+}
