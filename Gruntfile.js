@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-typescript');
@@ -11,7 +12,8 @@ module.exports = function (grunt) {
 
         build: {
             root: 'webroot',
-            js: 'webroot/js'
+            js: 'webroot/js',
+            bower: 'bower_components'
         },
 
         typescript: {
@@ -42,13 +44,22 @@ module.exports = function (grunt) {
                 }
             }
         },
-        open : {
+        open: {
             build: {
                 path: 'http://localhost:<%= connect.server.options.port %>/<%= build.root %>'
+            }
+        },
+
+        copy: {
+            threejs: {
+                files: [
+                    {expand: true, cwd: '<%= build.bower %>', src: ['threejs/{build,editor,examples}/**'], dest: '<%= build.root %>/'},
+                ]
             }
         }
     });
 
     grunt.registerTask('default', ['connect:server', 'open:build', 'watch']);
+    grunt.registerTask('threejs', ['copy:threejs']);
 };
 
